@@ -5,21 +5,12 @@
  */
 package suppliers;
 
-import java.awt.HeadlessException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import inventoryclass.login.Functions;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import product.productItem;
 
 /**
  *
@@ -27,21 +18,19 @@ import product.productItem;
  */
 public class SuppliersForm extends javax.swing.JFrame {
 
-    Suppliers supplier = new Suppliers();
-    String USERNAME = "jeff";
-    String PASSWORD = "pass";
-    String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
+    // Suppliers supplier = new Suppliers();
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     String strDate = dateFormat.format(date);
+    static int flag = 1;
 
     /**
      * Creates new form SuppliersForm
      */
-    public SuppliersForm() {
+    public SuppliersForm(int n) {
         initComponents();
         txtDate.setText(strDate);
-                
+        flag = n;
     }
 
     /**
@@ -73,8 +62,10 @@ public class SuppliersForm extends javax.swing.JFrame {
         txtAddress = new javax.swing.JTextField();
         txtPostcode = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtProduct = new javax.swing.JTextField();
+        lblMessageSupplliers = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,15 +146,26 @@ public class SuppliersForm extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 204, 102));
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\truck-2-32.png")); // NOI18N
+        jLabel10.setText("Suppliers Form");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -172,6 +174,9 @@ public class SuppliersForm extends javax.swing.JFrame {
 
         txtProduct.setToolTipText("");
 
+        lblMessageSupplliers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblMessageSupplliers.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -179,13 +184,8 @@ public class SuppliersForm extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(btnConfirm)
-                        .addGap(159, 159, 159)
-                        .addComponent(btnCancel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel2)
@@ -220,17 +220,27 @@ public class SuppliersForm extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
+                        .addGap(54, 54, 54)
                         .addComponent(jLabel4)
-                        .addGap(26, 26, 26)
-                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnConfirm)
+                                .addGap(142, 142, 142)
+                                .addComponent(btnCancel))
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblMessageSupplliers)
+                        .addGap(175, 175, 175)))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblMessageSupplliers)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,15 +272,15 @@ public class SuppliersForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))))
-                .addGap(34, 34, 34)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(44, 44, 44)
+                    .addComponent(jLabel4)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirm)
                     .addComponent(btnCancel))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -281,9 +291,7 @@ public class SuppliersForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(672, 409));
@@ -292,88 +300,58 @@ public class SuppliersForm extends javax.swing.JFrame {
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
-        SuppliersPage updateConfirm = new SuppliersPage();
+        Functions updateConfirm = new Functions();
         String checkEmail = txtEmail.getText();
-        String itemCheck;
 
-        if (!searchData(checkEmail).equals(checkEmail)) {
-            includeSupplier();
-            updateConfirm.LoadData();
+        if (!validFormFields()) {
+            this.lblMessageSupplliers.setText("ALL FIELDS MUST TO BE FILLED");
         } else {
+            if (flag == 1) {
+                if (!Functions.SearchSupplier(checkEmail)) {
+                    Suppliers supplier = new Suppliers();
+                    supplier.setNickName(txtNickname.getText());
+                    supplier.setEmail(txtEmail.getText());
+                    supplier.setName(txtName.getText());
+                    supplier.setDateInclusion(txtDate.getText());
+                    supplier.setCity(txtCity.getText());
+                    supplier.setPostcode(txtPostcode.getText());
+                    supplier.setPhone(Integer.parseInt(txtPhone.getText()));
+                    supplier.setProduct(txtProduct.getText());
+                    supplier.setAddress(txtAddress.getText());
+                    //Include a new supplier according to the filled fields
+                    Functions.RegisterSupplier(supplier);
+                    this.setVisible(true);
+                    this.dispose();
+                    //update the table
+                    Functions.LoadSuppliers();
 
-            this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "This email is already registered");
+                }
+            } else {
+                Functions.UpdateSupplier();
+                this.dispose();
+            }
         }
-
     }//GEN-LAST:event_btnConfirmActionPerformed
-    public void includeSupplier() {
-            
-            supplier.setNickName(txtNickname.getText());
-            supplier.setEmail(txtEmail.getText());
-            supplier.setName(txtName.getText());
-            supplier.setDateInclusion(txtDate.getText());
-            supplier.setCity(txtCity.getText());
-            supplier.setPostcode(txtPostcode.getText());
-            supplier.setPhone(Integer.parseInt(txtPhone.getText()));
-            supplier.setProduct(txtProduct.getText());
-            supplier.setAddress(txtAddress.getText());
-        
-
-        SaveToDatabase(supplier);
-        this.setVisible(false);
-    }
-
-    private void SaveToDatabase(Suppliers guest) {
-        String USERNAME = "jeff";
-        String PASSWORD = "pass";
-        String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-
-        try {
-            // Class.forName("com.mysql.jdbc.Driver");
-            //com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Insert into suppliers(nickName,email,name,address,city,postcode,phone,product, dateinclusion)"
-                    + "values(?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, guest.getNickName());
-            pst.setString(2, guest.getEmail());
-            pst.setString(3, guest.getName());
-            pst.setString(4, guest.getAddress());
-            pst.setString(5, guest.getCity());
-            pst.setString(6, guest.getPostcode());
-            pst.setString(7, String.valueOf(guest.getPhone()));
-            pst.setString(8, guest.getProduct());
-            pst.setString(9, guest.getDateInclusion());
-
-            int result = pst.executeUpdate();
-            if (result == 1) {
-                JOptionPane.showMessageDialog(null, "Registered Succesfully.");
-            }
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
+    //Method to validate if the fields are filled
+    private boolean validFormFields() {
+        boolean fieldsFilled = true;
+        if (SuppliersForm.txtNickname.getText().length() == 0
+                || SuppliersForm.txtAddress.getText().length() == 0
+                || SuppliersForm.txtCity.getText().length() == 0
+                || SuppliersForm.txtDate.getText().length() == 0
+                || SuppliersForm.txtEmail.getText().length() == 0
+                || SuppliersForm.txtName.getText().length() == 0
+                || SuppliersForm.txtPhone.getText().length() == 0
+                || SuppliersForm.txtPostcode.getText().length() == 0
+                || SuppliersForm.txtProduct.getText().length() == 0) {
+            fieldsFilled = false;
         }
+        return fieldsFilled;
     }
 
-    private String searchData(String keys) {
 
-        String email = "";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Select * from suppliers where email='" + keys + "'";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                email = rs.getString("email");
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-
-        }
-        return email;
-    }
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -413,7 +391,7 @@ public class SuppliersForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SuppliersForm().setVisible(true);
+                new SuppliersForm(flag).setVisible(true);
             }
         });
     }
@@ -422,6 +400,7 @@ public class SuppliersForm extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -432,14 +411,15 @@ public class SuppliersForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtDate;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtNickname;
-    private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtPostcode;
-    private javax.swing.JTextField txtProduct;
+    private javax.swing.JLabel lblMessageSupplliers;
+    public static javax.swing.JTextField txtAddress;
+    public static javax.swing.JTextField txtCity;
+    public static javax.swing.JTextField txtDate;
+    public static javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtName;
+    public static javax.swing.JTextField txtNickname;
+    public static javax.swing.JTextField txtPhone;
+    public static javax.swing.JTextField txtPostcode;
+    public static javax.swing.JTextField txtProduct;
     // End of variables declaration//GEN-END:variables
 }

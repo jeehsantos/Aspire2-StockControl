@@ -5,38 +5,37 @@
  */
 package customers;
 
-import java.awt.HeadlessException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import inventoryclass.login.Functions;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import suppliers.Suppliers;
 
 /**
  *
  * @author Jefferson Santos
  */
 public class CustomersForm extends javax.swing.JFrame {
-        String USERNAME = "jeff";
-        String PASSWORD = "pass";
-        String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = dateFormat.format(date);
+
+    String USERNAME = "jeff";
+    String PASSWORD = "pass";
+    String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
+    Date date = Calendar.getInstance().getTime();
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    String strDate = dateFormat.format(date);
+    static int flag = 1;
+
     /**
      * Creates new form CustomersForm
      */
-    public CustomersForm() {
+    public CustomersForm(int n) {
         initComponents();
         txtDate.setText(strDate);
+        flag = n;
     }
     Customers customer = new Customers();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,6 +66,7 @@ public class CustomersForm extends javax.swing.JFrame {
         rdoMale = new javax.swing.JRadioButton();
         txtBirth = new javax.swing.JFormattedTextField();
         txtPhone = new javax.swing.JFormattedTextField();
+        lblMessageCustomer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +128,7 @@ public class CustomersForm extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 102));
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\buy-24.png")); // NOI18N
         jLabel1.setText("Customer Form");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -149,7 +150,7 @@ public class CustomersForm extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Genre");
+        jLabel9.setText("Gender");
 
         rdoFemale.setBackground(new java.awt.Color(0, 204, 102));
         Genre.add(rdoFemale);
@@ -175,6 +176,9 @@ public class CustomersForm extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        lblMessageCustomer.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblMessageCustomer.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,6 +187,21 @@ public class CustomersForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(151, 151, 151)
+                                .addComponent(btnConfirm)
+                                .addGap(159, 159, 159)
+                                .addComponent(btnCancel))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(209, 209, 209)
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdoMale, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdoFemale)))
+                        .addGap(0, 116, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,29 +226,20 @@ public class CustomersForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtBirth)
                             .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(151, 151, 151)
-                                .addComponent(btnConfirm)
-                                .addGap(159, 159, 159)
-                                .addComponent(btnCancel))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(209, 209, 209)
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdoMale, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdoFemale)))
-                        .addGap(0, 116, Short.MAX_VALUE)))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))))
                 .addGap(106, 106, 106))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(lblMessageCustomer)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMessageCustomer)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -281,87 +291,60 @@ public class CustomersForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        // TODO add your handling code here:
-        CustomersPage updateConfirm = new CustomersPage();
-        String checkEmail = txtEmail.getText();
-        String itemCheck;
-
-        if (!searchData(checkEmail).equals(checkEmail)) {
-            includeCustomer();
-            updateConfirm.LoadData();
+        //Call the function to check if all fields are filled
+        Functions updateConfirm = new Functions();
+        if (!ValidFormFields()) {
+            lblMessageCustomer.setText("All fields must to be filled");
         } else {
-
-            this.dispose();
+            if (flag == 1) {
+                String checkEmail = txtEmail.getText();
+                //check if email already exist in database
+                if (!Functions.CheckCustomerEmail(checkEmail)) {
+                    this.getCustomerForm();
+                    Functions.LoadCustomers();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "This email is already registered");
+                }
+            } else {
+                 Functions.UpdateCustomer();
+                 this.dispose();
+            }
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
-     public void includeCustomer() {
-            String numb1 = txtPhone.getText().substring(1,3);
-            String numb2 = txtPhone.getText().substring(4,8);
-            String numb3 = txtPhone.getText().substring(9);
-            customer.setName(txtName.getText());
-            customer.setEmail(txtEmail.getText());
-            customer.setDateInclusion(txtDate.getText());
-            customer.setCity(txtCity.getText());
-            customer.setPhone(Integer.parseInt(numb1+numb2+numb3));
-            if(rdoMale.isSelected()){
-            customer.setGender("Male");
-            }else{
-            customer.setGender("Female");
-            }
-            customer.setDateBirth(txtBirth.getText());
-           
-        
+    //Method to validate if the fields are filled
+    private boolean ValidFormFields() {
+        boolean fieldsFilled = true;
+        if (this.txtName.getText().length() == 0
+                || this.txtEmail.getText().length() == 0
+                || this.txtCity.getText().length() == 0
+                || this.txtDate.getText().length() == 0
+                || this.txtPhone.getText().length() == 0) {
+            fieldsFilled = false;
+        }
+        return fieldsFilled;
+    }
 
-        SaveToDatabase(customer);
+    //Get the form values and send the values to the Customer class
+    public void getCustomerForm() {
+        String numb1 = txtPhone.getText().substring(1, 3);
+        String numb2 = txtPhone.getText().substring(4, 8);
+        String numb3 = txtPhone.getText().substring(9);
+        customer.setName(txtName.getText());
+        customer.setEmail(txtEmail.getText());
+        customer.setDateInclusion(txtDate.getText());
+        customer.setCity(txtCity.getText());
+        customer.setPhone(Integer.parseInt(numb1 + numb2 + numb3));
+        if (rdoMale.isSelected()) {
+            customer.setGender("Male");
+        } else {
+            customer.setGender("Female");
+        }
+        customer.setDateBirth(txtBirth.getText());
+        Functions.RegisterCustomer(customer);
         this.setVisible(false);
     }
-     private void SaveToDatabase(Customers guest) {
-        try {
-            // Class.forName("com.mysql.jdbc.Driver");
-            //com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Insert into customers(email,phone,city,gender,dateBirth,name,dateInclusion)"
-                    + "values(?,?,?,?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, guest.getEmail());
-            pst.setString(2, String.valueOf(guest.getPhone()));
-            pst.setString(3, guest.getCity());
-            pst.setString(4, guest.getGender());
-            pst.setString(5, guest.getDateBirth());
-            pst.setString(6, guest.getName());
-            pst.setString(7, guest.getDateInclusion());
 
-            int result = pst.executeUpdate();
-            if (result == 1) {
-                JOptionPane.showMessageDialog(null, "Registered Succesfully.");
-            }
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-    }
-     
-      private String searchData(String keys) {
-
-        String email = "";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Select * from suppliers where email='" + keys + "'";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                email = rs.getString("email");
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-
-        }
-        return email;
-    }
-    
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -397,7 +380,7 @@ public class CustomersForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomersForm().setVisible(true);
+                new CustomersForm(flag).setVisible(true);
             }
         });
     }
@@ -416,13 +399,14 @@ public class CustomersForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton rdoFemale;
-    private javax.swing.JRadioButton rdoMale;
-    private javax.swing.JFormattedTextField txtBirth;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtDate;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JFormattedTextField txtPhone;
+    private javax.swing.JLabel lblMessageCustomer;
+    public static javax.swing.JRadioButton rdoFemale;
+    public static javax.swing.JRadioButton rdoMale;
+    public static javax.swing.JFormattedTextField txtBirth;
+    public static javax.swing.JTextField txtCity;
+    public static javax.swing.JTextField txtDate;
+    public static javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtName;
+    public static javax.swing.JFormattedTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

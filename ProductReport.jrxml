@@ -237,7 +237,7 @@ FROM
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#00CC66" uuid="19b30e70-2976-4d57-b712-704f7da9b848"/>
 				<textField evaluationTime="Report">
-					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF" uuid="4447adfb-1a45-4035-8e9d-f340b8120b6e"/>
+					<reportElement style="Column header" x="736" y="1" width="40" height="22" forecolor="#FFFFFF" uuid="4447adfb-1a45-4035-8e9d-f340b8120b6e"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="true"/>
 					</textElement>
@@ -251,12 +251,26 @@ FROM
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Column header" x="677" y="5" width="80" height="20" forecolor="#FFFFFF" uuid="0da66246-a59b-4a7a-a57c-f032ac78985f"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
+					<reportElement style="Column header" x="666" y="3" width="70" height="20" forecolor="#FFFFFF" uuid="0da66246-a59b-4a7a-a57c-f032ac78985f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="569" y="3" width="33" height="18" forecolor="#FFFFFF" uuid="d568a583-6218-4b58-8f2a-f0bed03bd412"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="440" y="3" width="129" height="18" forecolor="#FFFFFF" uuid="f4d38230-18bc-4002-a33c-54ebee7f0bf7"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total of Products:]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</pageFooter>

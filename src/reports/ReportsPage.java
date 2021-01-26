@@ -5,21 +5,17 @@
  */
 package reports;
 
-import com.mysql.jdbc.Connection;
-//import com.mysql.cj.jdbc.Driver;
-import com.mysql.jdbc.PreparedStatement;
 import customers.CustomersPage;
 import inventoryclass.AccountPage;
 import inventoryclass.HomePage;
+import inventoryclass.login.Functions;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -32,19 +28,20 @@ import suppliers.SuppliersPage;
  * @author Jefferson Santos
  */
 public class ReportsPage extends javax.swing.JFrame {
-
     String USERNAME = "jeff";
     String PASSWORD = "pass";
     String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
     private java.sql.Connection connection;
     private Statement command;
     private ResultSet data;
-
+    static String flag = "";
     /**
      * Creates new form ReportsPage
      */
-    public ReportsPage() {
+    public ReportsPage(String n) {
+        this.flag = n;
         initComponents();
+        Functions.LoadReports();
     }
 
     /**
@@ -92,6 +89,7 @@ public class ReportsPage extends javax.swing.JFrame {
         btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnHome.setForeground(new java.awt.Color(51, 153, 0));
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\home-5-24.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnHome.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -106,6 +104,7 @@ public class ReportsPage extends javax.swing.JFrame {
         btnOrders.setBackground(new java.awt.Color(255, 255, 255));
         btnOrders.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnOrders.setForeground(new java.awt.Color(51, 153, 0));
+        btnOrders.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\cart-19-24.png")); // NOI18N
         btnOrders.setText("Orders");
         btnOrders.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnOrders.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -120,6 +119,7 @@ public class ReportsPage extends javax.swing.JFrame {
         btnBooking.setBackground(new java.awt.Color(255, 255, 255));
         btnBooking.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBooking.setForeground(new java.awt.Color(51, 153, 0));
+        btnBooking.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\product-24.png")); // NOI18N
         btnBooking.setText("Booking in ");
         btnBooking.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnBooking.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -134,6 +134,7 @@ public class ReportsPage extends javax.swing.JFrame {
         btnSuppliers.setBackground(new java.awt.Color(255, 255, 255));
         btnSuppliers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuppliers.setForeground(new java.awt.Color(51, 153, 0));
+        btnSuppliers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\truck-2-24.png")); // NOI18N
         btnSuppliers.setText("Suppliers");
         btnSuppliers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnSuppliers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -148,6 +149,7 @@ public class ReportsPage extends javax.swing.JFrame {
         btnCustomers.setBackground(new java.awt.Color(255, 255, 255));
         btnCustomers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCustomers.setForeground(new java.awt.Color(51, 153, 0));
+        btnCustomers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\buy-24.png")); // NOI18N
         btnCustomers.setText("Customers");
         btnCustomers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnCustomers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -162,6 +164,7 @@ public class ReportsPage extends javax.swing.JFrame {
         btnReports.setBackground(new java.awt.Color(255, 255, 255));
         btnReports.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnReports.setForeground(new java.awt.Color(51, 153, 0));
+        btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\printer-24.png")); // NOI18N
         btnReports.setText("Reports");
         btnReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnReports.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -176,6 +179,7 @@ public class ReportsPage extends javax.swing.JFrame {
         btnAccount.setBackground(new java.awt.Color(255, 255, 255));
         btnAccount.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAccount.setForeground(new java.awt.Color(51, 153, 0));
+        btnAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\settings-23-24.png")); // NOI18N
         btnAccount.setText("Account");
         btnAccount.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnAccount.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -240,37 +244,54 @@ public class ReportsPage extends javax.swing.JFrame {
         listReports.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 102)));
         listReports.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Code", "Description", "Sale", "Quantity", "Price"
+                "Code", "Description", "Price", "Sale date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        listReports.setGridColor(new java.awt.Color(0, 204, 102));
+        listReports.setSelectionBackground(new java.awt.Color(0, 204, 102));
         jScrollPane1.setViewportView(listReports);
 
         lstTypes.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lstTypes.setForeground(new java.awt.Color(0, 204, 102));
-        lstTypes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales", "Products", "Suppliers", "Customers" }));
+        lstTypes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales", "All Sales", "Products", "Suppliers", "Customers" }));
         lstTypes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lstTypesMouseEntered(evt);
             }
         });
 
-        txtFrom.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        try {
+            txtFrom.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
-        txtTo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        try {
+            txtTo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtTo.setToolTipText("DD/MM/YYYY");
 
         btnClear.setBackground(new java.awt.Color(255, 255, 255));
@@ -404,43 +425,43 @@ public class ReportsPage extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        new HomePage().setVisible(true);
+        new HomePage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnOrdersActionPerformed
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBookingActionPerformed
 
     private void btnSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliersActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage().setVisible(true);
+        new SuppliersPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSuppliersActionPerformed
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         // TODO add your handling code here:
-        new CustomersPage().setVisible(true);
+        new CustomersPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCustomersActionPerformed
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
-        new ReportsPage().setVisible(true);
+        new ReportsPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnReportsActionPerformed
 
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         // TODO add your handling code here:
-        new AccountPage().setVisible(true);
+        new AccountPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccountActionPerformed
 
@@ -451,10 +472,13 @@ public class ReportsPage extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnPrintActionPerformed
+    //Selection for the specific report
     public void printReport(String table) {
-        String src = "";
+        String src = ""; 
         if (table.equals("Sales")) {
             src = "C:/Users/jeehs/OneDrive/Documentos/NetBeansProjects/StockInventory/SalesReport.jasper";
+        }else if (table.equals("All Sales")) {
+            src = "C:/Users/jeehs/OneDrive/Documentos/NetBeansProjects/StockInventory/AllSalesReport.jasper";
         } else if (table.equals("Products")) {
             src = "C:/Users/jeehs/OneDrive/Documentos/NetBeansProjects/StockInventory/ProductReport.jasper";
         } else if (table.equals("Suppliers")) {
@@ -483,15 +507,17 @@ public class ReportsPage extends javax.swing.JFrame {
     }
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
-        txtFrom.setText("DD/MM/YYYY");
-        txtTo.setText("DD/MM/YYYY");
+        txtFrom.setText("");
+        txtTo.setText("");
         txtCode.setText("");
         lstTypes.setSelectedItem("Sales");
+        Functions.LoadReports();
     }//GEN-LAST:event_btnClearActionPerformed
     //Question if MouseEntered is the right option
     private void lstTypesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstTypesMouseEntered
         // TODO add your handling code here:
         String valid = lstTypes.getSelectedItem().toString();
+        //if it is not Sales options the filter will not be available
         if (!valid.equals("Sales")) {
             txtTo.setEnabled(false);
             txtFrom.setEnabled(false);
@@ -511,32 +537,13 @@ public class ReportsPage extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         String valid = lstTypes.getSelectedItem().toString();
+        String dateTo = txtTo.getText();
+        String dateFrom = txtFrom.getText();
+        String itemCod = txtCode.getText();
+        Functions.FilterSale(dateTo, dateFrom, itemCod);
 
     }//GEN-LAST:event_btnSearchActionPerformed
-    public void LoadData() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            java.sql.Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Select * from products";
-            java.sql.PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tbl = (DefaultTableModel) listReports.getModel();
-            tbl.setRowCount(0);
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                Object o[] = {rs.getString("itemDescription"),
-                    rs.getString("itemSize"),
-                    rs.getString("itemQuantity"),
-                    rs.getString("itemColour"),
-                    rs.getString("itemPrice")};
-                tbl.addRow(o);  //adding record into table row
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-
+   
     /**
      * @param args the command line arguments
      */
@@ -572,7 +579,7 @@ public class ReportsPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReportsPage().setVisible(true);
+                new ReportsPage(flag).setVisible(true);
             }
         });
     }
@@ -598,7 +605,7 @@ public class ReportsPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblReports;
-    private javax.swing.JTable listReports;
+    public static javax.swing.JTable listReports;
     private javax.swing.JComboBox<String> lstTypes;
     private javax.swing.JTextField txtCode;
     private javax.swing.JFormattedTextField txtFrom;

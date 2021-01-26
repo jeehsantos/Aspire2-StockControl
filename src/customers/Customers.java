@@ -1,18 +1,15 @@
 package customers;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import inventoryclass.login.Person;
 
 /**
  *
  * @author Jefferson Santos
  */
-public class Customers {
+public class Customers extends Person {
 
-    String name, email, city, gender, dateInclusion, dateBirth;
-    int phone;
+    String gender,dateBirth;
+   
     //Constructor
     public Customers() {
         this.name = name;
@@ -21,39 +18,10 @@ public class Customers {
         this.gender = gender;
         this.phone = phone;
         this.dateBirth = dateBirth;
-    }
-    //methods getters and setters
-    public String getDateInclusion() {
-        return dateInclusion;
-    }
-
-    public void setDateInclusion(String dateInclusion) {
         this.dateInclusion = dateInclusion;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+    //methods getters and setters
+   
 
     public String getGender() {
         return gender;
@@ -63,14 +31,7 @@ public class Customers {
         this.gender = gender;
     }
 
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
+   
     public String getDateBirth() {
         return dateBirth;
     }

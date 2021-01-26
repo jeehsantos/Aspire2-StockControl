@@ -6,8 +6,9 @@ import javax.swing.JOptionPane;
 
 public class LoginPage extends javax.swing.JFrame {
 
-    UserCheck dtba = new UserCheck();
-
+    Functions checkField = new Functions();
+    User session = new User();
+    String flag = "";
     /**
      * Creates new form LoginPage
      */
@@ -34,6 +35,8 @@ public class LoginPage extends javax.swing.JFrame {
         lblSignUp = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
+        lblEmailreq = new javax.swing.JLabel();
+        lblPassreq = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -93,6 +96,10 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
+        lblEmailreq.setForeground(new java.awt.Color(255, 0, 0));
+
+        lblPassreq.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,22 +107,29 @@ public class LoginPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblSignUp)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLogin))
-                            .addComponent(txtEmail)
-                            .addComponent(txtPass)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(jLabel7)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lblPassreq))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblSignUp)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnLogin))
+                                .addComponent(txtEmail)
+                                .addComponent(txtPass)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(lblEmailreq, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -127,17 +141,21 @@ public class LoginPage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmailreq)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPassreq)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(jLabel1))
                 .addGap(60, 60, 60)
                 .addComponent(lblSignUp)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\Downloads\\6cpLAR8o9i (1).png")); // NOI18N
@@ -202,18 +220,25 @@ public class LoginPage extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         //UserCheck dtba = new UserCheck();
+        flag = txtEmail.getText();
+        HomePage account = new HomePage(flag);
         String message = "ATENTION";
-        if (dtba.VerifyUser(txtEmail.getText(), txtPass.getText())) {
-            new HomePage().setVisible(true);
-            dtba.getLogin(this.txtEmail.getText());
-
-            this.dispose();
+        if (this.txtEmail.getText().length() == 0) {
+            this.lblEmailreq.setText("Email field required");
+        } else if (this.txtPass.getText().length() == 0) {
+            this.lblPassreq.setText("Password field required");
         } else {
-            JOptionPane.showMessageDialog(new JFrame(), "Incorrect credentials !", message,
-                    JOptionPane.WARNING_MESSAGE);
+            if (checkField.VerifyUser(txtEmail.getText(), txtPass.getText())) {
+                session.setEmail(txtEmail.getText());
+               // Functions.LoadUserAcc(session);
+                new HomePage(flag).setVisible(true);
+                //checkField.getLogin(this.txtEmail.getText());
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "Incorrect credentials !", message,
+                        JOptionPane.WARNING_MESSAGE);
+            }
         }
-
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -261,8 +286,10 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblEmailreq;
+    private javax.swing.JLabel lblPassreq;
     private javax.swing.JLabel lblSignUp;
-    private javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPass;
     // End of variables declaration//GEN-END:variables
 }

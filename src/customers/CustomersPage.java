@@ -8,13 +8,8 @@ package customers;
 import inventoryclass.AccountPage;
 import inventoryclass.HomePage;
 import inventoryclass.OrdersPage;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import inventoryclass.login.Functions;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import product.ItensPage;
 import reports.ReportsPage;
 import suppliers.SuppliersPage;
@@ -28,13 +23,16 @@ public class CustomersPage extends javax.swing.JFrame {
     String USERNAME = "jeff";
     String PASSWORD = "pass";
     String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-
+    int flag = 1;
+    static String currentUser = " ";
     /**
      * Creates new form CustomersPage
      */
-    public CustomersPage() {
+    public CustomersPage(String n) {
         initComponents();
-        LoadData();
+        this.currentUser = n;
+        Functions.LoadCustomers();
+        
     }
 
     /**
@@ -401,6 +399,7 @@ public class CustomersPage extends javax.swing.JFrame {
         btnBooking1.setBackground(new java.awt.Color(255, 255, 255));
         btnBooking1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBooking1.setForeground(new java.awt.Color(51, 153, 0));
+        btnBooking1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\product-24.png")); // NOI18N
         btnBooking1.setText("Booking in");
         btnBooking1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnBooking1.addActionListener(new java.awt.event.ActionListener() {
@@ -412,6 +411,7 @@ public class CustomersPage extends javax.swing.JFrame {
         btnSuppliers1.setBackground(new java.awt.Color(255, 255, 255));
         btnSuppliers1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuppliers1.setForeground(new java.awt.Color(51, 153, 0));
+        btnSuppliers1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\truck-2-24.png")); // NOI18N
         btnSuppliers1.setText("Suppliers");
         btnSuppliers1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnSuppliers1.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -426,6 +426,7 @@ public class CustomersPage extends javax.swing.JFrame {
         btnCustomers1.setBackground(new java.awt.Color(255, 255, 255));
         btnCustomers1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCustomers1.setForeground(new java.awt.Color(51, 153, 0));
+        btnCustomers1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\buy-24.png")); // NOI18N
         btnCustomers1.setText("Customers");
         btnCustomers1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnCustomers1.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -455,6 +456,7 @@ public class CustomersPage extends javax.swing.JFrame {
         btnAccount1.setBackground(new java.awt.Color(255, 255, 255));
         btnAccount1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAccount1.setForeground(new java.awt.Color(51, 153, 0));
+        btnAccount1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\settings-23-24.png")); // NOI18N
         btnAccount1.setText("Account");
         btnAccount1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnAccount1.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -469,6 +471,7 @@ public class CustomersPage extends javax.swing.JFrame {
         btnOrders1.setBackground(new java.awt.Color(255, 255, 255));
         btnOrders1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnOrders1.setForeground(new java.awt.Color(51, 153, 0));
+        btnOrders1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\cart-19-24.png")); // NOI18N
         btnOrders1.setText("Orders");
         btnOrders1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnOrders1.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -548,6 +551,8 @@ public class CustomersPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        listCustomers.setGridColor(new java.awt.Color(0, 204, 102));
+        listCustomers.setSelectionBackground(new java.awt.Color(0, 204, 102));
         jScrollPane2.setViewportView(listCustomers);
 
         btnEdit1.setBackground(new java.awt.Color(255, 255, 255));
@@ -697,38 +702,39 @@ public class CustomersPage extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        new HomePage().setVisible(true);
+        
+        new HomePage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBookingActionPerformed
 
     private void btnSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliersActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage().setVisible(true);
+        new SuppliersPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSuppliersActionPerformed
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         // TODO add your handling code here:
-        new CustomersPage().setVisible(true);
+        new CustomersPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCustomersActionPerformed
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
-        new ReportsPage().setVisible(true);
+        new ReportsPage(currentUser).setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btnReportsActionPerformed
 
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         // TODO add your handling code here:
-        new AccountPage().setVisible(true);
+        new AccountPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccountActionPerformed
 
@@ -742,142 +748,69 @@ public class CustomersPage extends javax.swing.JFrame {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        /*checkAction = 2;
-        ProductForm productEdit = new ProductForm();
-        DefaultTableModel tblModel = (DefaultTableModel) listProducts.getModel();
-        int i = listProducts.getSelectedRow();
-        if (listProducts.getSelectedRow() != - 1) {
-            String itemDesc = tblModel.getValueAt(i, 0).toString();
-            new ProductForm().setVisible(true);
-            productEdit.searchData1(itemDesc);
-
-        }*/
+       
     }//GEN-LAST:event_btnEditActionPerformed
     //Delete a specific register according to the selected row
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        int n = JOptionPane.showConfirmDialog(null, "Do you want to delete the selected supplier?", "DELETE OPTION", JOptionPane.YES_NO_OPTION);
-        if (n == 0) {
-            DefaultTableModel tblModel = (DefaultTableModel) listCustomers.getModel();
-            int i = listCustomers.getSelectedRow();
-            if (listCustomers.getSelectedRow() != - 1) {
-
-                String nickName = tblModel.getValueAt(i, 0).toString();
-
-                try {
-
-                    Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-                    String sql = "Delete from suppliers where nickName LIKE '" + nickName + "'";
-                    PreparedStatement pst = con.prepareStatement(sql);
-                    pst.executeUpdate();
-                    LoadData();
-                    JOptionPane.showMessageDialog(null, "Delete Successfully.");
-
-                    // ClearAllFields();
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
-            }
-        }
+       
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnIncludeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncludeActionPerformed
         // TODO add your handling code here:
-        new CustomersForm().setVisible(true);
+        
     }//GEN-LAST:event_btnIncludeActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String selected = cboSelected.getSelectedItem().toString();
-
-        String search = txtSearch.getText();
-
-        filterData(search, selected);
+       
     }//GEN-LAST:event_btnSearchActionPerformed
-    //Get the values to filter and show a specific register
-    public void filterData(String search, String selected) {
-        if (selected.equals("Name")) {
-            selected = "name";
-        } else if (selected.equals("Phone")) {
-            selected = "phone";
-        } else if (selected.equals("Gender")) {
-            selected = "gender";
-        } else if (selected.equals("Date of Birth")) {
-            selected = "dateBirth";
-        } else if (selected.equals("City")) {
-            selected = "city";
-        }
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-
-            String sql = "SELECT * FROM `customers` WHERE `" + selected + "`  LIKE ?";
-
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, search);
-            // pst.setString(2, search);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tbl = (DefaultTableModel) listCustomers.getModel();
-            tbl.setRowCount(0);
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                Object o[] = {rs.getString("name"),
-                    rs.getString("phone"),
-                    rs.getString("city")};
-
-                tbl.addRow(o);  //adding record into table row
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+   
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        LoadData();
-        txtSearch.setText("");
+      
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnHome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHome1ActionPerformed
         // TODO add your handling code here:
-        new HomePage().setVisible(true);
+        new HomePage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHome1ActionPerformed
 
     private void btnBooking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBooking1ActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBooking1ActionPerformed
 
     private void btnSuppliers1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliers1ActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage().setVisible(true);
+        new SuppliersPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSuppliers1ActionPerformed
 
     private void btnCustomers1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomers1ActionPerformed
         // TODO add your handling code here:
-        new CustomersPage().setVisible(true);
+        new CustomersPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCustomers1ActionPerformed
 
     private void btnReports1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReports1ActionPerformed
         // TODO add your handling code here:
-        new ReportsPage().setVisible(true);
+        new ReportsPage(currentUser).setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_btnReports1ActionPerformed
 
     private void btnAccount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccount1ActionPerformed
         // TODO add your handling code here:
-        new AccountPage().setVisible(true);
+        new AccountPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccount1ActionPerformed
 
     private void btnOrders1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrders1ActionPerformed
         // TODO add your handling code here:
-        new OrdersPage().setVisible(true);
+        new OrdersPage(currentUser).setVisible(true);
     }//GEN-LAST:event_btnOrders1ActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
@@ -886,72 +819,29 @@ public class CustomersPage extends javax.swing.JFrame {
 
     private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
         // TODO add your handling code here:
-        /*checkAction = 2;
-        ProductForm productEdit = new ProductForm();
-        DefaultTableModel tblModel = (DefaultTableModel) listProducts.getModel();
-        int i = listProducts.getSelectedRow();
-        if (listProducts.getSelectedRow() != - 1) {
-            String itemDesc = tblModel.getValueAt(i, 0).toString();
-            new ProductForm().setVisible(true);
-            productEdit.searchData1(itemDesc);
-
-        }*/
+        flag = 2;
+        Functions.LoadCustomersForm();
     }//GEN-LAST:event_btnEdit1ActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
         // TODO add your handling code here:
-        int n = JOptionPane.showConfirmDialog(null, "Do you want to delete the selected supplier?", "DELETE OPTION", JOptionPane.YES_NO_OPTION);
+        
+         int n = JOptionPane.showConfirmDialog(null, "Do you want to delete the selected supplier?", "DELETE OPTION", JOptionPane.YES_NO_OPTION);
+
         if (n == 0) {
-            DefaultTableModel tblModel = (DefaultTableModel) listCustomers.getModel();
-            int i = listCustomers.getSelectedRow();
-            if (listCustomers.getSelectedRow() != - 1) {
+            Functions.DeleteCustomer(n);
 
-                String name = tblModel.getValueAt(i, 0).toString();
-
-                try {
-
-                    Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-                    String sql = "Delete from customers where name LIKE '" + name + "'";
-                    PreparedStatement pst = con.prepareStatement(sql);
-                    pst.executeUpdate();
-                    LoadData();
-                    JOptionPane.showMessageDialog(null, "Delete Successfully.");
-
-                    // ClearAllFields();
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
-                // tese.setItemDescription((listProducts.getValueAt(listProducts.getSelectedRow(), 0)));
-
-                // dao.delete(tese);
-            }
         }
+         
+       
     }//GEN-LAST:event_btnDelete1ActionPerformed
-
-    public void LoadData() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Select * from customers";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tbl = (DefaultTableModel) listCustomers.getModel();
-            tbl.setRowCount(0);
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                Object o[] = {rs.getString("name"),
-                    rs.getString("phone"),
-                    rs.getString("city")};
-                tbl.addRow(o);  //adding record into table row
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+ 
+   
     private void btnInclude1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInclude1ActionPerformed
         // TODO add your handling code here:
-        new CustomersForm().setVisible(true);
+        flag = 1;
+        new CustomersForm(flag).setVisible(true);
+        Functions.LoadCustomers();
     }//GEN-LAST:event_btnInclude1ActionPerformed
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
@@ -960,12 +850,12 @@ public class CustomersPage extends javax.swing.JFrame {
 
         String search = txtSearch.getText();
 
-        filterData(search, selected);
+        Functions.FilterCustomer(search, selected);
     }//GEN-LAST:event_btnSearch1ActionPerformed
 
     private void btnRefresh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresh1ActionPerformed
         // TODO add your handling code here:
-        LoadData();
+        Functions.LoadCustomers();
         txtSearch.setText("");
     }//GEN-LAST:event_btnRefresh1ActionPerformed
 
@@ -999,7 +889,7 @@ public class CustomersPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomersPage().setVisible(true);
+                new CustomersPage(currentUser).setVisible(true);
             }
         });
     }
@@ -1043,7 +933,7 @@ public class CustomersPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable listCustomers;
+    public static javax.swing.JTable listCustomers;
     private javax.swing.JTable listSuppliers;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearch2;

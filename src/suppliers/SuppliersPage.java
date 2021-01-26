@@ -8,15 +8,9 @@ package suppliers;
 import customers.CustomersPage;
 import inventoryclass.AccountPage;
 import inventoryclass.HomePage;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import inventoryclass.login.Functions;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import product.ItensPage;
-import product.ProductForm;
 import reports.ReportsPage;
 
 /**
@@ -24,13 +18,15 @@ import reports.ReportsPage;
  * @author Jefferson Santos
  */
 public class SuppliersPage extends javax.swing.JFrame {
-
+    int flag = 1;
+    static String currentUser = " ";
     /**
      * Creates new form Suppliers
      */
-    public SuppliersPage() {
+    public SuppliersPage(String n) {
         initComponents();
-        LoadData();
+        this.currentUser = n;
+        Functions.LoadSuppliers();
     }
 
     /**
@@ -84,6 +80,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnHome.setForeground(new java.awt.Color(51, 153, 0));
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\home-5-24.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +92,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         btnBooking.setBackground(new java.awt.Color(255, 255, 255));
         btnBooking.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBooking.setForeground(new java.awt.Color(51, 153, 0));
+        btnBooking.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\product-24.png")); // NOI18N
         btnBooking.setText("Booking in");
         btnBooking.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnBooking.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +104,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         btnSuppliers.setBackground(new java.awt.Color(255, 255, 255));
         btnSuppliers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuppliers.setForeground(new java.awt.Color(51, 153, 0));
+        btnSuppliers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\truck-2-24.png")); // NOI18N
         btnSuppliers.setText("Suppliers");
         btnSuppliers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnSuppliers.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +116,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         btnCustomers.setBackground(new java.awt.Color(255, 255, 255));
         btnCustomers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCustomers.setForeground(new java.awt.Color(51, 153, 0));
+        btnCustomers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\buy-24.png")); // NOI18N
         btnCustomers.setText("Customers");
         btnCustomers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnCustomers.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +128,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         btnReports.setBackground(new java.awt.Color(255, 255, 255));
         btnReports.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnReports.setForeground(new java.awt.Color(51, 153, 0));
+        btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\printer-24.png")); // NOI18N
         btnReports.setText("Reports");
         btnReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnReports.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +140,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         btnAccount.setBackground(new java.awt.Color(255, 255, 255));
         btnAccount.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAccount.setForeground(new java.awt.Color(51, 153, 0));
+        btnAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\settings-23-24.png")); // NOI18N
         btnAccount.setText("Account");
         btnAccount.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +152,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         btnOrders.setBackground(new java.awt.Color(255, 255, 255));
         btnOrders.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnOrders.setForeground(new java.awt.Color(51, 153, 0));
+        btnOrders.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\cart-19-24.png")); // NOI18N
         btnOrders.setText("Orders");
         btnOrders.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnOrders.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +229,8 @@ public class SuppliersPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        listSuppliers.setGridColor(new java.awt.Color(0, 204, 102));
+        listSuppliers.setSelectionBackground(new java.awt.Color(0, 204, 102));
         jScrollPane1.setViewportView(listSuppliers);
 
         btnEdit.setBackground(new java.awt.Color(255, 255, 255));
@@ -375,67 +380,46 @@ public class SuppliersPage extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        new HomePage().setVisible(true);
+        new HomePage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBookingActionPerformed
-    public void LoadData() {
-        String USERNAME = "jeff";
-        String PASSWORD = "pass";
-        String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Select * from suppliers";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tbl = (DefaultTableModel) listSuppliers.getModel();
-            tbl.setRowCount(0);
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                Object o[] = {rs.getString("nickName"),
-                    rs.getString("phone"),
-                    rs.getString("product"),
-                    rs.getString("city")};
-                tbl.addRow(o);  //adding record into table row
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+    
+    //goes to suppliers page
     private void btnSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliersActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage().setVisible(true);
+        new SuppliersPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSuppliersActionPerformed
-
+    //goes to customers page
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         // TODO add your handling code here:
-        new CustomersPage().setVisible(true);
+        new CustomersPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCustomersActionPerformed
-
+    //goes to reports page
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
-        new ReportsPage().setVisible(true);
+        new ReportsPage(currentUser).setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_btnReportsActionPerformed
-
+    //goes to account setting page
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         // TODO add your handling code here:
-        new AccountPage().setVisible(true);
+        new AccountPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccountActionPerformed
-
+    //goes to orders page
     private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
         // TODO add your handling code here:
+        new SuppliersPage(currentUser).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnOrdersActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
@@ -443,114 +427,35 @@ public class SuppliersPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        /*checkAction = 2;
-        ProductForm productEdit = new ProductForm();
-        DefaultTableModel tblModel = (DefaultTableModel) listProducts.getModel();
-        int i = listProducts.getSelectedRow();
-        if (listProducts.getSelectedRow() != - 1) {
-            String itemDesc = tblModel.getValueAt(i, 0).toString();
-            new ProductForm().setVisible(true);
-            productEdit.searchData1(itemDesc);
-
-        }*/
+        flag = 2; 
+        Functions.LoadSupplierForm();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int n = JOptionPane.showConfirmDialog(null, "Do you want to delete the selected supplier?", "DELETE OPTION", JOptionPane.YES_NO_OPTION);
-        if(n == 0){
-            String USERNAME = "jeff";
-            String PASSWORD = "pass";
-            String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-            DefaultTableModel tblModel = (DefaultTableModel) listSuppliers.getModel();
-            int i = listSuppliers.getSelectedRow();
-            if (listSuppliers.getSelectedRow() != - 1) {
-               
-                String nickName = tblModel.getValueAt(i, 0).toString();
-
-                try {
-
-                    Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-                    String sql = "Delete from suppliers where nickName LIKE '" + nickName + "'";
-                    PreparedStatement pst = con.prepareStatement(sql);
-                    pst.executeUpdate();
-                    LoadData();
-                    JOptionPane.showMessageDialog(null, "Delete Successfully.");
-                    LoadData();
-                    // ClearAllFields();
-
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
-                // tese.setItemDescription((listProducts.getValueAt(listProducts.getSelectedRow(), 0)));
-
-                // dao.delete(tese);
-            }}
+        Functions.DeleteSupplier(n);
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+    //calls the supplier form
     private void btnIncludeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncludeActionPerformed
         // TODO add your handling code here:
-
-        new SuppliersForm().setVisible(true);
+        flag = 1;
+        new SuppliersForm(flag).setVisible(true);
+        Functions.LoadSuppliers();
     }//GEN-LAST:event_btnIncludeActionPerformed
-
+    //get the value in the box and texbox and calls the function filterData
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         String selected = cboSelected.getSelectedItem().toString();
 
         String search = txtSearch.getText();
-
-        filterData(search, selected);
+        //Question
+        Functions.FilterSupplier(search, selected);
     }//GEN-LAST:event_btnSearchActionPerformed
     
-    public void filterData(String search, String selected) {
-        String USERNAME = "jeff";
-        String PASSWORD = "pass";
-        String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-        if (selected.equals("Name")) {
-            selected = "name";
-        } else if (selected.equals("Email")) {
-
-            selected = "email";
-        } else if (selected.equals("Nickname")) {
-            selected = "nickName";
-        } else if (selected.equals("Address")) {
-            selected = "address";
-        } else if (selected.equals("City")) {
-            selected = "City";
-        } else if (selected.equals("Product")) {
-            selected = "product";
-        }
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-
-            String sql = "SELECT * FROM `suppliers` WHERE `" + selected + "`  LIKE ?";
-
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, search);
-            // pst.setString(2, search);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tbl = (DefaultTableModel) listSuppliers.getModel();
-            tbl.setRowCount(0);
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                Object o[] = {rs.getString("nickName"),
-                    rs.getString("phone"),
-                    rs.getString("product"),
-                    rs.getString("city")};
-
-                tbl.addRow(o);  //adding record into table row
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        LoadData();
+        Functions.LoadSuppliers();
         txtSearch.setText("");
 
     }//GEN-LAST:event_btnRefreshActionPerformed
@@ -586,7 +491,7 @@ public class SuppliersPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SuppliersPage().setVisible(true);
+                new SuppliersPage(currentUser).setVisible(true);
             }
         });
     }
@@ -613,7 +518,7 @@ public class SuppliersPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable listSuppliers;
+    public static javax.swing.JTable listSuppliers;
     private javax.swing.JMenuItem teste;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables

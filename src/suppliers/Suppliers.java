@@ -1,5 +1,6 @@
 package suppliers;
 
+import inventoryclass.login.Person;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,9 +10,8 @@ import java.util.Date;
  *
  * @author Jefferson Santos
  */
-public class Suppliers {
-    String nickName, email, name, address, city, postcode, product, dateInclusion;
-    int phone;
+public class Suppliers extends Person {
+    String nickName, address, postcode, product;
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     String strDate = dateFormat.format(date);
@@ -28,21 +28,7 @@ public class Suppliers {
         this.nickName = nickName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+   
 
     public String getAddress() {
         return address;
@@ -50,14 +36,6 @@ public class Suppliers {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getPostcode() {
@@ -76,20 +54,5 @@ public class Suppliers {
         this.product = product;
     }
 
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-    public String getDateInclusion() {
-        return dateInclusion;
-    }
-
-    public void setDateInclusion(String dateInclusion) {
-        this.dateInclusion = dateInclusion;
-    }
     
 }

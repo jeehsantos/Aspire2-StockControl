@@ -5,10 +5,8 @@
  */
 package inventoryclass.login;
 
-import inventoryclass.login.User;
-import java.awt.HeadlessException;
+import connection.Connection;
 import java.sql.*;
-import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -20,10 +18,7 @@ public class RegisterUser extends javax.swing.JFrame {
     private static ResultSet data;
     private static Connection connection;
     private static Statement command;
-    private static String username = "jeff";
-    private static String password = "pass";
-    private static String connectionString = "jdbc:mysql://localhost:3306/controlstock";
-    UserCheck check = new UserCheck();
+    Functions check = new Functions();
 
     /**
      * Creates new form RegisterUser
@@ -58,6 +53,7 @@ public class RegisterUser extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtRepeat = new javax.swing.JPasswordField();
         cboAdmin = new javax.swing.JCheckBox();
+        lblFields = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,8 +64,6 @@ public class RegisterUser extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 102));
         jLabel1.setText("New user");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Área de Trabalho\\055_add_new_user-512.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,6 +135,9 @@ public class RegisterUser extends javax.swing.JFrame {
         cboAdmin.setForeground(new java.awt.Color(255, 255, 255));
         cboAdmin.setText("Admin");
 
+        lblFields.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblFields.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -181,10 +178,15 @@ public class RegisterUser extends javax.swing.JFrame {
                 .addGap(100, 100, 100))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnConfirm)
-                .addGap(101, 101, 101)
-                .addComponent(btnCancel)
-                .addGap(130, 130, 130))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnConfirm)
+                        .addGap(101, 101, 101)
+                        .addComponent(btnCancel)
+                        .addGap(130, 130, 130))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblFields)
+                        .addGap(206, 206, 206))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +208,9 @@ public class RegisterUser extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtRepeat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFields)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(cboActive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,6 +246,7 @@ public class RegisterUser extends javax.swing.JFrame {
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
+        //Send the values to the User class and constructor
 
         String checkPassword = txtRepeat.getText();
         String isAdmin;
@@ -251,22 +256,34 @@ public class RegisterUser extends javax.swing.JFrame {
         } else {
             isAdmin = "2";
         }
-        //Send the values to the User class and constructor
-        User newUser = new User(txtName.getText(), txtEmail.getText(), txtPassword.getText(), isAdmin, cboActive.getSelectedItem().toString());
-        //Valid if the email is registered
-        if (check.VerifyUser(txtEmail.getText(), txtPassword.getText())) {
-            JOptionPane.showMessageDialog(null, "Email already registered !");
-        } else {
-            //Validation to check if the password from the form matches and update the database
-            if (checkPassword.equals(newUser.getPassword())) {
 
-                check.SaveToDatabase(newUser);
-                dispose();
+        //Valid if the email is registered
+        if (this.txtName.getText().length() == 0 || this.txtEmail.getText().length() == 0
+                || this.txtPassword.getText().length() == 0 || this.txtRepeat.getText().length() == 0) {
+
+            this.lblFields.setText("ALL FIELDS ARE REQUIRED");
+
+        } else {
+
+            User newUser = new User();
+            //Validation to check if the password from the form matches and update the database
+            if (checkPassword.equals(txtPassword.getText())) {
+                newUser.setName(this.txtName.getText());
+                newUser.setEmail(this.txtEmail.getText());
+                newUser.setPassword(this.txtPassword.getText());
+                newUser.setActive(this.cboActive.getSelectedItem().toString());
+                newUser.setAdmin(isAdmin);
+
+                if (Functions.isRegister(newUser)) {
+                    showMessageDialog(this, "New user registered.");
+                    dispose();
+                } else {
+                    showMessageDialog(this, "User already exist.");
+                }
             } else {
                 showMessageDialog(null, "Your passwords does not match");
             }
         }
-
     }//GEN-LAST:event_btnConfirmActionPerformed
     /**
      * @param args the command line arguments
@@ -317,6 +334,7 @@ public class RegisterUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblFields;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;

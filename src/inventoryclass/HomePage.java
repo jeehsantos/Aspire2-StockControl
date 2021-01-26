@@ -15,12 +15,13 @@ import suppliers.SuppliersPage;
  * @author Jefferson Santos
  */
 public class HomePage extends javax.swing.JFrame {
-
+    static String flag = "";
     /**
      * Creates new form test
      */
-    public HomePage() {
+    public HomePage(String n) {
         initComponents();
+        flag = n ;
     }
 
     /**
@@ -75,6 +76,7 @@ public class HomePage extends javax.swing.JFrame {
         btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnHome.setForeground(new java.awt.Color(51, 153, 0));
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\home-5-24.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnHome.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -89,6 +91,7 @@ public class HomePage extends javax.swing.JFrame {
         btnBooking.setBackground(new java.awt.Color(255, 255, 255));
         btnBooking.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBooking.setForeground(new java.awt.Color(51, 153, 0));
+        btnBooking.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\product-24.png")); // NOI18N
         btnBooking.setText("Booking in");
         btnBooking.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnBooking.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +103,7 @@ public class HomePage extends javax.swing.JFrame {
         btnSuppliers.setBackground(new java.awt.Color(255, 255, 255));
         btnSuppliers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuppliers.setForeground(new java.awt.Color(51, 153, 0));
+        btnSuppliers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\truck-2-24.png")); // NOI18N
         btnSuppliers.setText("Suppliers");
         btnSuppliers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnSuppliers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -114,6 +118,7 @@ public class HomePage extends javax.swing.JFrame {
         btnCustomers.setBackground(new java.awt.Color(255, 255, 255));
         btnCustomers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCustomers.setForeground(new java.awt.Color(51, 153, 0));
+        btnCustomers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\buy-24.png")); // NOI18N
         btnCustomers.setText("Customers");
         btnCustomers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnCustomers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -128,6 +133,7 @@ public class HomePage extends javax.swing.JFrame {
         btnReports.setBackground(new java.awt.Color(255, 255, 255));
         btnReports.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnReports.setForeground(new java.awt.Color(51, 153, 0));
+        btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\printer-24.png")); // NOI18N
         btnReports.setText("Reports");
         btnReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnReports.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -142,6 +148,7 @@ public class HomePage extends javax.swing.JFrame {
         btnAccount.setBackground(new java.awt.Color(255, 255, 255));
         btnAccount.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAccount.setForeground(new java.awt.Color(51, 153, 0));
+        btnAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\settings-23-24.png")); // NOI18N
         btnAccount.setText("Account");
         btnAccount.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnAccount.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -156,6 +163,7 @@ public class HomePage extends javax.swing.JFrame {
         btnOrders.setBackground(new java.awt.Color(255, 255, 255));
         btnOrders.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnOrders.setForeground(new java.awt.Color(51, 153, 0));
+        btnOrders.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\cart-19-24.png")); // NOI18N
         btnOrders.setText("Orders");
         btnOrders.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnOrders.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -253,43 +261,44 @@ public class HomePage extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        new HomePage().setVisible(true);
+        new HomePage(flag).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(flag).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnBookingActionPerformed
     
     private void btnSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliersActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage().setVisible(true);
+        new SuppliersPage(flag).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSuppliersActionPerformed
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         // TODO add your handling code here:
-        new CustomersPage().setVisible(true);
+        new CustomersPage(flag).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCustomersActionPerformed
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
-        new ReportsPage().setVisible(true);
+        new ReportsPage(flag).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnReportsActionPerformed
 
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         // TODO add your handling code here:
-        new AccountPage().setVisible(true);
+        
+        new AccountPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccountActionPerformed
 
     private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
         // TODO add your handling code here:
-        new OrdersPage().setVisible(true);
+        new OrdersPage(flag).setVisible(true);
         dispose();
 
     }//GEN-LAST:event_btnOrdersActionPerformed
@@ -325,7 +334,7 @@ public class HomePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomePage().setVisible(true);
+                new HomePage(flag).setVisible(true);
             }
         });
     }

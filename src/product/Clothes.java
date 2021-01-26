@@ -10,46 +10,38 @@ package product;
  * @author Jefferson Santos
  */
 public class Clothes extends Products {
-    String itemCode, type, colour, description, brand, size;
-    Double promotion, price;
-    int quantity;
 
-    public Clothes(String itemCode, String type, String colour, String description,
-            String brand, String size, Double promotion, Double price, int quantity) {
-        super(itemCode, type);
-        this.itemCode = itemCode;
-        this.type = type;
-        this.colour = colour;
-        this.description = description;
-        this.brand = brand;
-        this.size = size;
-        this.promotion = promotion;
-        this.price = price;
-        this.quantity = quantity;
-    }
+    private String colour, description, brand, size;
+    private int quantity;
 
-    @Override
-    public String getItemCode() {
-        return itemCode;
-    }
+    public static String LIST = "SELECT * FROM products";
+    public static String DELETE = "SELECT * FROM `products` WHERE `?`  LIKE ?";
+    public static String REGISTER = "INSERT INTO products("
+            + "itemCod,"
+            + "itemType,"
+            + "itemBrand,"
+            + "itemSize,"
+            + "itemColour)"
+            + "itemDescription)"
+            + "itemPrice)"
+            + "itemPromo)"
+            + "itemQuantity)"
+            + "VALUES(?,?,?,?,?)";
 
-    @Override
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(String type) {
-        this.type = type;
+    public Clothes() {
+        super();
+        this.itemCode = "";
+        this.type = "";
+        this.colour = "";
+        this.description = "";
+        this.brand = "";
+        this.size = "";
+        this.price = 00.00;
+        this.quantity = 0;
     }
 
     public String getColour() {
-        return colour;
+        return this.colour;
     }
 
     public void setColour(String colour) {
@@ -57,7 +49,7 @@ public class Clothes extends Products {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -65,7 +57,7 @@ public class Clothes extends Products {
     }
 
     public String getBrand() {
-        return brand;
+        return this.brand;
     }
 
     public void setBrand(String brand) {
@@ -73,36 +65,36 @@ public class Clothes extends Products {
     }
 
     public String getSize() {
-        return size;
+        return this.size;
     }
 
     public void setSize(String size) {
         this.size = size;
     }
 
-    public Double getPromotion() {
-        return promotion;
-    }
-
-    public void setPromotion(Double promotion) {
-        this.promotion = promotion;
-    }
-
+    @Override
     public Double getPrice() {
-        return price;
+        return this.price;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    //If some promotion available, the percentage is going to be inserted by the user and the price will be reduced
+    @Override
+    public void setPrice(double price) {
+
+        if (promo > 0.0) {
+            this.price = price - (price * (promo / 100));
+        } else {
+            this.price = price;
+        }
+
     }
 
     public int getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        this.quantity += quantity;
     }
-    
-    
+
 }

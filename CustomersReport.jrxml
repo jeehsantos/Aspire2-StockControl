@@ -226,6 +226,20 @@ FROM
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
+				<textField pattern="###0.00;-###0.00">
+					<reportElement style="Column header" x="556" y="3" width="141" height="20" forecolor="#FFFFFF" uuid="b3863474-73af-4b61-8c32-6947dd018dff"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial Black" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="415" y="5" width="138" height="18" forecolor="#FFFFFF" uuid="aec9454e-5767-4a1a-8f5f-c09ad0267240"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total of Customers:]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</pageFooter>

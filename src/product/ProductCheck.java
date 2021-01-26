@@ -89,7 +89,7 @@ public class ProductCheck {
             JOptionPane.showMessageDialog(null, e);
         }
     }*/
-    private static void UpdateProduct() {
+   private static void UpdateProduct() {
         int result;
         try {
             connection = DriverManager.getConnection(connectionString, username, password);
@@ -103,7 +103,7 @@ public class ProductCheck {
         }
     }
 
-    private static void InsertProduct() {
+    /*private static void InsertProduct() {
         String sql = "INSERT INTO person(studentid, firstname, "
                 + "lastname, gender,email, programmeID)"
                 + "values('FP55845','Cloves', 'Team','Male','normal@gmail.com',"
@@ -133,9 +133,9 @@ public class ProductCheck {
         } finally {
         }
     }
-
+*/
     
-    public void ListProduct(String code) {
+    /*public void ListProduct(String code) {
         
         try {
             Connection con = DriverManager.getConnection(connectionString, username, password);
@@ -157,5 +157,5 @@ public class ProductCheck {
                     } catch (SQLException ex) {
             ex.printStackTrace();
         }
-    }
+    }*/
 }

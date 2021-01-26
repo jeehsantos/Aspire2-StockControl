@@ -9,14 +9,8 @@ import customers.CustomersPage;
 import inventoryclass.AccountPage;
 import inventoryclass.HomePage;
 import inventoryclass.OrdersPage;
-import product.ProductForm;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import inventoryclass.login.Functions;
 import javax.swing.JOptionPane;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import javax.swing.table.DefaultTableModel;
 import reports.ReportsPage;
 import suppliers.SuppliersPage;
 
@@ -26,40 +20,23 @@ import suppliers.SuppliersPage;
  * @author Jefferson Santos
  */
 public class ItensPage extends javax.swing.JFrame {
+
     int checkAction;
+  
+    String USERNAME = "jeff";
+    String PASSWORD = "pass";
+    String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
+    Functions product = new Functions();
+    int flag = 1;
+   static String emailUser = "";
+
     /**
      * Creates new form MainPage
      */
-    public ItensPage() {
+    public ItensPage(String n) {
         initComponents();
-        LoadData();
-    }
-
-    public void LoadData() {
-        String USERNAME = "jeff";
-        String PASSWORD = "pass";
-        String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-            String sql = "Select * from products";
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tbl = (DefaultTableModel) listProducts.getModel();
-            tbl.setRowCount(0);
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                Object o[] = {rs.getString("itemDescription"),
-                    rs.getString("itemSize"),
-                    rs.getString("itemQuantity"),
-                    rs.getString("itemColour"),
-                    rs.getString("itemPrice")};
-                tbl.addRow(o);  //adding record into table row
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+       emailUser = n;
+        Functions.LoadProducts();
     }
 
     /**
@@ -81,7 +58,6 @@ public class ItensPage extends javax.swing.JFrame {
         btnReports = new javax.swing.JButton();
         btnAccount = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        txtSearch = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listProducts = new javax.swing.JTable();
         btnEdit = new javax.swing.JButton();
@@ -92,6 +68,7 @@ public class ItensPage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnRefresh = new javax.swing.JButton();
+        txtSearch1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 0));
@@ -113,6 +90,7 @@ public class ItensPage extends javax.swing.JFrame {
         btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnHome.setForeground(new java.awt.Color(51, 153, 0));
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\home-5-24.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnHome.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -127,6 +105,7 @@ public class ItensPage extends javax.swing.JFrame {
         btnOrders.setBackground(new java.awt.Color(255, 255, 255));
         btnOrders.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnOrders.setForeground(new java.awt.Color(51, 153, 0));
+        btnOrders.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\cart-19-24.png")); // NOI18N
         btnOrders.setText("Orders");
         btnOrders.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnOrders.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -141,6 +120,7 @@ public class ItensPage extends javax.swing.JFrame {
         btnBooking.setBackground(new java.awt.Color(255, 255, 255));
         btnBooking.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBooking.setForeground(new java.awt.Color(51, 153, 0));
+        btnBooking.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\product-24.png")); // NOI18N
         btnBooking.setText("Booking in");
         btnBooking.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnBooking.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +132,7 @@ public class ItensPage extends javax.swing.JFrame {
         btnSuppliers.setBackground(new java.awt.Color(255, 255, 255));
         btnSuppliers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuppliers.setForeground(new java.awt.Color(51, 153, 0));
+        btnSuppliers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\truck-2-24.png")); // NOI18N
         btnSuppliers.setText("Suppliers");
         btnSuppliers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnSuppliers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -166,6 +147,7 @@ public class ItensPage extends javax.swing.JFrame {
         btnCustomers.setBackground(new java.awt.Color(255, 255, 255));
         btnCustomers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCustomers.setForeground(new java.awt.Color(51, 153, 0));
+        btnCustomers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\buy-24.png")); // NOI18N
         btnCustomers.setText("Customers");
         btnCustomers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnCustomers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -180,6 +162,7 @@ public class ItensPage extends javax.swing.JFrame {
         btnReports.setBackground(new java.awt.Color(255, 255, 255));
         btnReports.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnReports.setForeground(new java.awt.Color(51, 153, 0));
+        btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\printer-24.png")); // NOI18N
         btnReports.setText("Reports");
         btnReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnReports.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -194,6 +177,7 @@ public class ItensPage extends javax.swing.JFrame {
         btnAccount.setBackground(new java.awt.Color(255, 255, 255));
         btnAccount.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAccount.setForeground(new java.awt.Color(51, 153, 0));
+        btnAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\settings-23-24.png")); // NOI18N
         btnAccount.setText("Account");
         btnAccount.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnAccount.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -238,32 +222,22 @@ public class ItensPage extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(0, 204, 102));
 
-        txtSearch.setForeground(new java.awt.Color(0, 153, 0));
-        txtSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 102)));
-        txtSearch.setSelectionColor(new java.awt.Color(0, 204, 102));
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-
         listProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Description", "Size", "Quantity", "Colour", "Price"
+                "Code", "Description", "Size", "Quantity", "Colour", "Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -274,12 +248,15 @@ public class ItensPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        listProducts.setGridColor(new java.awt.Color(0, 204, 102));
+        listProducts.setSelectionBackground(new java.awt.Color(0, 204, 102));
         jScrollPane1.setViewportView(listProducts);
         if (listProducts.getColumnModel().getColumnCount() > 0) {
-            listProducts.getColumnModel().getColumn(0).setPreferredWidth(150);
-            listProducts.getColumnModel().getColumn(1).setPreferredWidth(5);
+            listProducts.getColumnModel().getColumn(1).setPreferredWidth(150);
             listProducts.getColumnModel().getColumn(2).setPreferredWidth(5);
-            listProducts.getColumnModel().getColumn(3).setPreferredWidth(50);
+            listProducts.getColumnModel().getColumn(3).setResizable(false);
+            listProducts.getColumnModel().getColumn(3).setPreferredWidth(5);
+            listProducts.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
         btnEdit.setBackground(new java.awt.Color(255, 255, 255));
@@ -355,43 +332,56 @@ public class ItensPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        txtSearch1.setForeground(new java.awt.Color(0, 153, 0));
+        txtSearch1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSearch1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 102)));
+        txtSearch1.setSelectionColor(new java.awt.Color(0, 204, 102));
+        txtSearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearch1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cboSelected, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(cboSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(btnSearch)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(btnInclude)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(btnDelete)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(btnEdit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cboSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
+                    .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInclude)
                     .addComponent(btnDelete)
                     .addComponent(btnEdit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -399,7 +389,7 @@ public class ItensPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(269, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,176 +410,94 @@ public class ItensPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        new HomePage().setVisible(true);
+        new HomePage(emailUser).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
         // TODO add your handling code here:
-        new OrdersPage().setVisible(true);
+        new OrdersPage(emailUser).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnOrdersActionPerformed
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(emailUser).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnBookingActionPerformed
 
     private void btnSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliersActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage().setVisible(true);
+        new SuppliersPage(emailUser).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSuppliersActionPerformed
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         // TODO add your handling code here:
-        new CustomersPage().setVisible(true);
+        new CustomersPage(emailUser).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCustomersActionPerformed
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
-        new ReportsPage().setVisible(true);
+        new ReportsPage(emailUser).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnReportsActionPerformed
 
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         // TODO add your handling code here:
-        new AccountPage().setVisible(true);
+        new AccountPage(emailUser).setVisible(true);
         dispose();
 
     }//GEN-LAST:event_btnAccountActionPerformed
 
     private void btnIncludeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncludeActionPerformed
         // TODO add your handling code here:
-        
-        new ProductForm().setVisible(true);
+        flag = 1;
+        new ProductForm(flag).setVisible(true);
+        Functions.LoadProducts();
     }//GEN-LAST:event_btnIncludeActionPerformed
-
+   
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+
         String selected = cboSelected.getSelectedItem().toString();
 
-        String search = txtSearch.getText();
+        String search = txtSearch1.getText();
 
-        filterData(search, selected);
+        Functions.setListar(search, selected);
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-       int n = JOptionPane.showConfirmDialog(null, "Do you want to delete the selected product?", "DELETE OPTION", JOptionPane.YES_NO_OPTION);
-        if(n == 0){
-        String USERNAME = "jeff";
-        String PASSWORD = "pass";
-        String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-        DefaultTableModel tblModel = (DefaultTableModel) listProducts.getModel();
-        int i = listProducts.getSelectedRow();
-        if (listProducts.getSelectedRow() != - 1) {
-            ProductCheck prod = new ProductCheck();
-            String itemDesc = tblModel.getValueAt(i, 0).toString();
+        int n = JOptionPane.showConfirmDialog(null, "Do you want to delete the selected product?", "DELETE OPTION", JOptionPane.YES_NO_OPTION);
 
-            try {
+        if (n == 0) {
+            Functions.DeleteProduct(n);
 
-                Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-                String sql = "Delete from products where itemDescription LIKE '" + itemDesc + "'";
-                PreparedStatement pst = con.prepareStatement(sql);
-                pst.executeUpdate();
-                LoadData();
-                JOptionPane.showMessageDialog(null, "Delete Successfully.");
-                //LoadData();
-                // ClearAllFields();
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-            // tese.setItemDescription((listProducts.getValueAt(listProducts.getSelectedRow(), 0)));
-
-            // dao.delete(tese);
-        }}
-
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        checkAction = 2;
-        ProductForm productEdit = new ProductForm();
-        DefaultTableModel tblModel = (DefaultTableModel) listProducts.getModel();
-        int i = listProducts.getSelectedRow();
-        if (listProducts.getSelectedRow() != - 1) {
-            String itemDesc = tblModel.getValueAt(i, 0).toString();
-            new ProductForm().setVisible(true);
-            productEdit.searchData1(itemDesc);
-             
+        flag = 2;
+        Functions.LoadProductForm();
 
-        }
     }//GEN-LAST:event_btnEditActionPerformed
     
-
     //buttom to refresh the table
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        LoadData();
-        txtSearch.setText("");
-        
+        Functions.LoadProducts();
+        txtSearch1.setText("");
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void txtSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearch1ActionPerformed
     //Method to load specific data according to the filled fields
-    public void filterData(String search, String selected) {
-        String USERNAME = "jeff";
-        String PASSWORD = "pass";
-        String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
-        if (selected.equals("Code")) {
-            selected = "itemCod";
-        } else if (selected.equals("Brand")) {
-
-            selected = "itemBrand";
-        } else if (selected.equals("Size")) {
-            selected = "itemSize";
-        } else if (selected.equals("Colour")) {
-            selected = "itemColour";
-        } else if (selected.equals("Price")) {
-            double convert = Double.parseDouble(selected);
-        } else if (selected.equals("Promotion")) {
-            double convert = Double.parseDouble(selected);
-        } else if (selected.equals("Description")) {
-            selected = "itemDescription";
-        } else if (selected.equals("Type")) {
-            selected = "itemType";
-        }
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-
-            String sql = "SELECT * FROM `products` WHERE `" + selected + "`  LIKE ?";
-
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, search);
-            // pst.setString(2, search);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel tbl = (DefaultTableModel) listProducts.getModel();
-            tbl.setRowCount(0);
-            //continue reading from resultset when there is a record
-            while (rs.next()) {
-                //getting data from database field in order according to table column
-                Object o[] = {rs.getString("itemDescription"),
-                    rs.getString("itemSize"),
-                    rs.getString("itemQuantity"),
-                    rs.getString("itemColour"),
-                    rs.getString("itemPrice")};
-
-                tbl.addRow(o);  //adding record into table row
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -622,7 +530,7 @@ public class ItensPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ItensPage().setVisible(true);
+                new ItensPage(emailUser).setVisible(true);
             }
         });
     }
@@ -632,9 +540,9 @@ public class ItensPage extends javax.swing.JFrame {
     private javax.swing.JButton btnBooking;
     private javax.swing.JButton btnCustomers;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEdit;
+    public static javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnInclude;
+    public static javax.swing.JButton btnInclude;
     private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnReports;
@@ -647,7 +555,7 @@ public class ItensPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable listProducts;
-    private javax.swing.JTextField txtSearch;
+    public static javax.swing.JTable listProducts;
+    private javax.swing.JTextField txtSearch1;
     // End of variables declaration//GEN-END:variables
 }

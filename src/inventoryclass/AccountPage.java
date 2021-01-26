@@ -6,9 +6,9 @@
 package inventoryclass;
 
 import customers.CustomersPage;
+import inventoryclass.login.Functions;
 import inventoryclass.login.LoginPage;
 import inventoryclass.login.User;
-import inventoryclass.login.UserCheck;
 import product.ItensPage;
 import reports.ReportsPage;
 import suppliers.SuppliersPage;
@@ -19,28 +19,27 @@ import suppliers.SuppliersPage;
  */
 public class AccountPage extends javax.swing.JFrame {
 
+    static String flag = "";
     String name, email, password, admin, active;
+    private static String USERNAME = "jeff";
+    private static String PASSWORD = "pass";
+    private static String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
+
     /**
      * Creates new form AccountPage
      */
-    User n;
-    UserCheck p = new UserCheck();
 
     //UserCheck n = new UserCheck();
-    public AccountPage() {
+    public AccountPage(String n) {
         initComponents();
-        setUsersField();
+        this.flag = n;
+        Functions.CurrentUser(flag);
+
     }
 
-    //in progress
-    public String setUsersField() {
-
-        return this.name;
-    }
-
-    public void LoadUser(User s) {
-
-        txtName.setText(s.getFullName());
+    public static void LoadUser(User s) {
+//just breakpoint messages...
+        txtName.setText(s.getName());
         txtEmail.setText(s.getEmail());
         txtPassword.setText(s.getPassword());
         if (s.isAdmin().equals("1")) {
@@ -63,7 +62,7 @@ public class AccountPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnConfirm = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cboAdmin = new javax.swing.JCheckBox();
         txtEmail = new javax.swing.JTextField();
@@ -83,14 +82,21 @@ public class AccountPage extends javax.swing.JFrame {
         btnReports = new javax.swing.JButton();
         btnAccount = new javax.swing.JButton();
         btnOrders = new javax.swing.JButton();
+        cboActive = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 102));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Confirm");
+        btnConfirm.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnConfirm.setText("Confirm");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,6 +111,7 @@ public class AccountPage extends javax.swing.JFrame {
         txtName.setText(" ");
 
         txtPosition.setText(" ");
+        txtPosition.setEnabled(false);
 
         jLabel2.setText("Name");
 
@@ -135,6 +142,7 @@ public class AccountPage extends javax.swing.JFrame {
         btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnHome.setForeground(new java.awt.Color(51, 153, 0));
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\home-5-24.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnHome.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -149,6 +157,7 @@ public class AccountPage extends javax.swing.JFrame {
         btnBooking.setBackground(new java.awt.Color(255, 255, 255));
         btnBooking.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBooking.setForeground(new java.awt.Color(51, 153, 0));
+        btnBooking.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\product-24.png")); // NOI18N
         btnBooking.setText("Booking in");
         btnBooking.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnBooking.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +169,7 @@ public class AccountPage extends javax.swing.JFrame {
         btnSuppliers.setBackground(new java.awt.Color(255, 255, 255));
         btnSuppliers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuppliers.setForeground(new java.awt.Color(51, 153, 0));
+        btnSuppliers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\truck-2-24.png")); // NOI18N
         btnSuppliers.setText("Suppliers");
         btnSuppliers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnSuppliers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -174,6 +184,7 @@ public class AccountPage extends javax.swing.JFrame {
         btnCustomers.setBackground(new java.awt.Color(255, 255, 255));
         btnCustomers.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCustomers.setForeground(new java.awt.Color(51, 153, 0));
+        btnCustomers.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\buy-24.png")); // NOI18N
         btnCustomers.setText("Customers");
         btnCustomers.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnCustomers.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -188,6 +199,7 @@ public class AccountPage extends javax.swing.JFrame {
         btnReports.setBackground(new java.awt.Color(255, 255, 255));
         btnReports.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnReports.setForeground(new java.awt.Color(51, 153, 0));
+        btnReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\printer-24.png")); // NOI18N
         btnReports.setText("Reports");
         btnReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnReports.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -202,6 +214,7 @@ public class AccountPage extends javax.swing.JFrame {
         btnAccount.setBackground(new java.awt.Color(255, 255, 255));
         btnAccount.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAccount.setForeground(new java.awt.Color(51, 153, 0));
+        btnAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\settings-23-24.png")); // NOI18N
         btnAccount.setText("Account");
         btnAccount.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnAccount.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -216,6 +229,7 @@ public class AccountPage extends javax.swing.JFrame {
         btnOrders.setBackground(new java.awt.Color(255, 255, 255));
         btnOrders.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnOrders.setForeground(new java.awt.Color(51, 153, 0));
+        btnOrders.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\cart-19-24.png")); // NOI18N
         btnOrders.setText("Orders");
         btnOrders.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnOrders.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -258,6 +272,12 @@ public class AccountPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        cboActive.setForeground(new java.awt.Color(0, 204, 102));
+        cboActive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("Active");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -274,16 +294,23 @@ public class AccountPage extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                                .addComponent(jButton3)
-                                .addGap(20, 20, 20))
-                            .addComponent(cboAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtPosition)
                             .addComponent(txtEmail)
                             .addComponent(txtName)
-                            .addComponent(txtPassword))
+                            .addComponent(txtPassword)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(cboAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6)
+                                        .addGap(19, 19, 19)
+                                        .addComponent(cboActive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(btnConfirm)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                                        .addComponent(jButton3)))
+                                .addGap(20, 20, 20)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
@@ -313,10 +340,13 @@ public class AccountPage extends javax.swing.JFrame {
                     .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addComponent(cboAdmin)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboAdmin)
+                    .addComponent(cboActive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnConfirm)
                     .addComponent(jButton3))
                 .addGap(136, 136, 136))
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -343,43 +373,43 @@ public class AccountPage extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        new HomePage().setVisible(true);
+        new HomePage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         // TODO add your handling code here:
-        new ItensPage().setVisible(true);
+        new ItensPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBookingActionPerformed
 
     private void btnSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppliersActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage().setVisible(true);
+        new SuppliersPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSuppliersActionPerformed
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         // TODO add your handling code here:
-        new CustomersPage().setVisible(true);
+        new CustomersPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCustomersActionPerformed
 
     private void btnReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportsActionPerformed
         // TODO add your handling code here:
-        new ReportsPage().setVisible(true);
+        new ReportsPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnReportsActionPerformed
 
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
         // TODO add your handling code here:
-        new AccountPage().setVisible(true);
+        new AccountPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccountActionPerformed
 
     private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
         // TODO add your handling code here:
-        new OrdersPage().setVisible(true);
+        new OrdersPage(flag).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnOrdersActionPerformed
 
@@ -389,6 +419,13 @@ public class AccountPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        // TODO add your handling code here:
+        Functions.UpdateUser(flag);
+        //get the new flag value after user edition
+        this.flag = txtEmail.getText();
+    }//GEN-LAST:event_btnConfirmActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -419,7 +456,7 @@ public class AccountPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AccountPage().setVisible(true);
+                new AccountPage(flag).setVisible(true);
             }
         });
     }
@@ -427,24 +464,26 @@ public class AccountPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccount;
     private javax.swing.JButton btnBooking;
+    private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnCustomers;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnReports;
     private javax.swing.JButton btnSuppliers;
-    private javax.swing.JCheckBox cboAdmin;
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JComboBox<String> cboActive;
+    public static javax.swing.JCheckBox cboAdmin;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JPasswordField txtPassword;
+    public static javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtName;
+    public static javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPosition;
     // End of variables declaration//GEN-END:variables
 }
