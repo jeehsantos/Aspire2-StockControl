@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SuppliersReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f737be97-7a91-4466-a722-9959622242d9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     suppliers.`nickName` AS suppliers_nickName,
+     suppliers.`email` AS suppliers_email,
+     suppliers.`city` AS suppliers_city,
+     suppliers.`postcode` AS suppliers_postcode,
+     suppliers.`phone` AS suppliers_phone,
+     suppliers.`product` AS suppliers_product,
+     suppliers.`dateInclusion` AS suppliers_dateInclusion
+FROM
+     `suppliers` suppliers]]>
+	</queryString>
+	<field name="suppliers_nickName" class="java.lang.String"/>
+	<field name="suppliers_email" class="java.lang.String"/>
+	<field name="suppliers_city" class="java.lang.String"/>
+	<field name="suppliers_postcode" class="java.lang.Integer"/>
+	<field name="suppliers_phone" class="java.lang.Integer"/>
+	<field name="suppliers_product" class="java.lang.String"/>
+	<field name="suppliers_dateInclusion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="170" y="13" width="263" height="33" forecolor="#00CC66" uuid="bc760cac-5cfb-40ac-8002-33d40b662173"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Suppliers Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="197" y="46" width="186" height="22" uuid="530e30da-7b53-4eea-bc5d-95fb9ebe9817"/>
+				<text><![CDATA[Aspire2 Stock Control]]></text>
+			</staticText>
+			<image>
+				<reportElement x="474" y="2" width="67" height="66" uuid="6e2f2fa8-0f36-4cad-afbd-195b1b7b5d29"/>
+				<imageExpression><![CDATA["C:\\Users\\jeehs\\Downloads\\6cpLAR8o9i (1).png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="d57e74c5-34dc-4d03-9554-bedae895efe0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="79" height="15" uuid="cbf639f0-4c02-4425-9462-69b63e39c2fe"/>
+				<text><![CDATA[Nickname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="79" y="19" width="148" height="15" uuid="0e20caf9-3137-4fc6-8aba-03c20ce24f2a"/>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="227" y="19" width="47" height="15" uuid="e1953bbb-6ef1-42f8-b79b-85faced6b5e8"/>
+				<text><![CDATA[City]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="275" y="19" width="65" height="15" uuid="783f4cbc-7c9a-4b64-ad2e-bbf423a1d309"/>
+				<text><![CDATA[Postcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="340" y="19" width="66" height="15" uuid="7612cbeb-920e-4046-b4c8-e6a10c9851a7"/>
+				<text><![CDATA[Phone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="406" y="19" width="58" height="15" uuid="aca6c40a-3fd1-4046-844b-7a35a6788bc4"/>
+				<text><![CDATA[Product]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="464" y="19" width="89" height="15" uuid="510f3b90-bd16-4ace-95a7-e43697794fac"/>
+				<text><![CDATA[Date Resgister]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="ea1d9b3d-4fc9-4708-94e8-252392d25f1f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="79" height="15" uuid="fe99350c-0a9f-45cb-8df5-a4a0f88fafa1"/>
+				<textFieldExpression><![CDATA[$F{suppliers_nickName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="79" y="0" width="148" height="15" uuid="82a5051e-8dcb-4eff-affc-559cc3e38478"/>
+				<textFieldExpression><![CDATA[$F{suppliers_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="227" y="0" width="47" height="15" uuid="f10d9195-8fb9-4b09-94ae-6b3e79d3dec0"/>
+				<textFieldExpression><![CDATA[$F{suppliers_city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="275" y="0" width="65" height="15" uuid="e2802f35-9ad4-4136-8540-a3617341c0b6"/>
+				<textFieldExpression><![CDATA[$F{suppliers_postcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="340" y="0" width="66" height="15" uuid="15b5f2ed-bff4-466e-943c-17c1eae4b731"/>
+				<textFieldExpression><![CDATA[$F{suppliers_phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="406" y="0" width="58" height="15" uuid="c933ec84-de81-4c0a-adf5-9e2bd45ea53c"/>
+				<textFieldExpression><![CDATA[$F{suppliers_product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="464" y="0" width="89" height="15" uuid="0da11e9f-0732-4872-bb31-8e76ef1a8e3c"/>
+				<textFieldExpression><![CDATA[$F{suppliers_dateInclusion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fa5ba536-9f91-42a5-b635-adc29c5593ae"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="36dde20c-a157-4f8f-ab48-e381b774a8f2"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="dd1e409e-965a-49a6-8ac3-cd0935456828"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="c658f193-14b3-4ba3-8059-66b951cc8eb3"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
