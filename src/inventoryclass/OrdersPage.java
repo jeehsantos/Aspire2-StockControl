@@ -148,7 +148,7 @@ public class OrdersPage extends javax.swing.JFrame {
         btnHome.setBackground(new java.awt.Color(255, 255, 255));
         btnHome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnHome.setForeground(new java.awt.Color(51, 153, 0));
-        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\New User\\Desktop\\Final Stock Project\\src\\images\\home-5-24.png")); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\NetBeansProjects\\StockInventory\\src\\images\\home-5-24.png")); // NOI18N
         btnHome.setText("Home");
         btnHome.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 153), new java.awt.Color(0, 204, 102), new java.awt.Color(51, 153, 0), new java.awt.Color(0, 204, 102)));
         btnHome.setMaximumSize(new java.awt.Dimension(65, 21));
@@ -297,6 +297,7 @@ public class OrdersPage extends javax.swing.JFrame {
         btnPay.setBackground(new java.awt.Color(255, 255, 255));
         btnPay.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnPay.setForeground(new java.awt.Color(0, 204, 102));
+        btnPay.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\GitHub\\Aspire2-StockControl\\src\\images\\money.png")); // NOI18N
         btnPay.setText("Pay");
         btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +308,7 @@ public class OrdersPage extends javax.swing.JFrame {
         btnRemove.setBackground(new java.awt.Color(255, 255, 255));
         btnRemove.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnRemove.setForeground(new java.awt.Color(0, 204, 102));
+        btnRemove.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\GitHub\\Aspire2-StockControl\\src\\images\\paint-brush-24.png")); // NOI18N
         btnRemove.setText("Remove");
         btnRemove.setMaximumSize(new java.awt.Dimension(115, 25));
         btnRemove.setMinimumSize(new java.awt.Dimension(115, 25));
@@ -368,7 +370,7 @@ public class OrdersPage extends javax.swing.JFrame {
 
         btnAdd.setBackground(new java.awt.Color(255, 255, 255));
         btnAdd.setForeground(new java.awt.Color(0, 153, 51));
-        btnAdd.setIcon(new javax.swing.ImageIcon("C:\\Users\\New User\\Desktop\\Final Stock Project\\src\\images\\plus.png")); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon("C:\\Users\\jeehs\\OneDrive\\Documentos\\GitHub\\Aspire2-StockControl\\src\\images\\plus.png")); // NOI18N
         btnAdd.setBorder(null);
         btnAdd.setBorderPainted(false);
         btnAdd.setContentAreaFilled(false);
@@ -521,7 +523,7 @@ public class OrdersPage extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
