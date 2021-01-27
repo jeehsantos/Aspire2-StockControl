@@ -8,6 +8,7 @@ package suppliers;
 import customers.CustomersPage;
 import inventoryclass.AccountPage;
 import inventoryclass.HomePage;
+import inventoryclass.OrdersPage;
 import inventoryclass.login.Functions;
 import javax.swing.JOptionPane;
 import product.ItensPage;
@@ -418,7 +419,7 @@ public class SuppliersPage extends javax.swing.JFrame {
     //goes to orders page
     private void btnOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdersActionPerformed
         // TODO add your handling code here:
-        new SuppliersPage(currentUser).setVisible(true);
+        new OrdersPage(currentUser).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnOrdersActionPerformed
 
