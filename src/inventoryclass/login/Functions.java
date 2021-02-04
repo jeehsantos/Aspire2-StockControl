@@ -47,10 +47,10 @@ import static suppliers.SuppliersPage.listSuppliers;
  */
 public class Functions {
 
-    private static PreparedStatement ps = null;
-    private static String USERNAME = "jeff";
-    private static String PASSWORD = "pass";
-    private static String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
+    private static final PreparedStatement ps = null;
+    private static final String USERNAME = "jeff";
+    private static final String PASSWORD = "pass";
+    private static final String CONN_STRING = "jdbc:mysql://localhost:3306/std511data";
     static String flag = "";
     Date date = Calendar.getInstance().getTime();
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

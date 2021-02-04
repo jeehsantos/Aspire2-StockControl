@@ -335,8 +335,7 @@ public class ProductForm extends javax.swing.JFrame {
                 || ProductForm.txtItemColour.getText().length() == 0
                 || ProductForm.txtItemPromo.getText().length() == 0
                 || ProductForm.txtItemPrice.getText().length() == 0
-                || ProductForm.spnQuantity.getValue().equals(0)
-                || ProductForm.txtItemDescription.getText().length() == 0) {
+                ||  ProductForm.txtItemDescription.getText().length() == 0) {
             fieldsFilled = false;
         }
         return fieldsFilled;

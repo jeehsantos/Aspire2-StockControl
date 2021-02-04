@@ -311,11 +311,11 @@ public class AccountPage extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                                         .addComponent(jButton3)))
                                 .addGap(20, 20, 20)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 182, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addComponent(jLabel1)
-                        .addContainerGap(247, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
